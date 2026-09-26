@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframes — App IP Ebenézer</title>
+<style>
+  :root {
+    --green: #1A6648;
+    --green-dark: #0F3D2A;
+    --green-light: #E8F4EE;
+    --white: #FFFFFF;
+    --bg: #F7F7F5;
+    --gray-light: #E8E8E6;
+    --gray: #9B9B9B;
+    --gray-dark: #555555;
+    --text: #1A1A1A;
+    --red: #C0392B;
+    --shadow: 0 2px 12px rgba(0,0,0,0.10);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #ECECEC;
+    color: var(--text);
+    padding: 40px 20px;
+  }
+
+  h1.page-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    color: var(--green-dark);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .page-subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  /* Navigation Tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .nav-tab {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 2px solid var(--green);
+    background: white;
+    color: var(--green);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .nav-tab.active, .nav-tab:hover {
+    background: var(--green);
+    color: white;
+  }
+
+  /* Screen grid */
+  .screens-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Screen wrapper */
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .screen-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 320px;
+    height: 640px;
+    background: var(--white);
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.1);
+    border: 8px solid #1A1A1A;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 24px;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex-shrink: 0;
+  }
+  .status-bar span { color: white; font-size: 10px; font-weight: 600; }
+
+  /* App header */
+  .app-header {
+    background: var(--green);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .app-header .logo-mark {
+    width: 32px; height: 32px;
+    background: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .app-header .header-text h2 {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .app-header .header-text p {
+    color: rgba(255,255,255,0.75);
+    font-size: 10px;
+  }
+  .app-header .header-action {
+    margin-left: auto;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  /* Sub-header with back */
+  .sub-header {
+    background: var(--green);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .sub-header .back-btn {
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .sub-header h2 {
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .sub-header .action-btn {
+    margin-left: auto;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+
+  /* Screen body */
+  .screen-body {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--bg);
+    padding: 12px;
+    scrollbar-width: none;
+  }
+  .screen-body::-webkit-scrollbar { display: none; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    height: 54px;
+    background: white;
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-shrink: 0;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    cursor: pointer;
+  }
+  .nav-item .icon { font-size: 18px; }
+  .nav-item .label { font-size: 9px; color: var(--gray); font-weight: 500; }
+  .nav-item.active .label { color: var(--green); font-weight: 700; }
+  .nav-item.active .icon { filter: none; }
+
+  /* ── Components ── */
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 12px 0 8px;
+  }
+
+  /* Card */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+  }
+  .card-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .card-subtitle {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+  .card-meta {
+    font-size: 10px;
+    color: var(--green);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* Avatar */
+  .avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .avatar-sm {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* Badge */
+  .badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-gray { background: var(--gray-light); color: var(--gray-dark); }
+  .badge-red { background: #FDEDED; color: var(--red); }
+
+  /* FAB */
+  .fab {
+    position: absolute;
+    right: 16px;
+    bottom: 66px;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(26,102,72,0.4);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* Input */
+  .input-group {
+    margin-bottom: 10px;
+  }
+  .input-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .input-field {
+    background: white;
+    border: 1.5px solid var(--gray-light);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--text);
+    width: 100%;
+  }
+  .input-field.focused { border-color: var(--green); }
+
+  /* Button */
+  .btn-primary {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 11px;
+    font-size: 13px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--green);
+    border: 1.5px solid var(--green);
+    border-radius: var(--radius-sm);
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Hero banner */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .hero-banner .hi { font-size: 11px; opacity: 0.8; margin-bottom: 2px; }
+  .hero-banner .name { font-size: 16px; font-weight: 700; font-family: Georgia, serif; }
+  .hero-banner .next-event {
+    margin-top: 10px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  .hero-banner .next-event .label { font-size: 9px; opacity: 0.75; }
+  .hero-banner .next-event .value { font-size: 12px; font-weight: 700; }
+
+  /* Event row */
+  .event-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .event-row:last-child { border-bottom: none; }
+  .event-date {
+    width: 36px;
+    background: var(--green-light);
+    border-radius: 8px;
+    text-align: center;
+    padding: 4px 0;
+    flex-shrink: 0;
+  }
+  .event-date .day { font-size: 16px; font-weight: 900; color: var(--green); }
+  .event-date .month { font-size: 8px; font-weight: 600; color: var(--green); text-transform: uppercase; }
+
+  /* Attendance toggle */
+  .attendance-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .attendance-row:last-child { border-bottom: none; }
+  .toggle {
+    margin-left: auto;
+    width: 36px; height: 20px;
+    border-radius: 10px;
+    background: var(--gray-light);
+    position: relative;
+    cursor: pointer;
+  }
+  .toggle.on { background: var(--green); }
+  .toggle-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 2px; left: 2px;
+    transition: left 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .toggle.on .toggle-thumb { left: 18px; }
+
+  /* Song card */
+  .song-card {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  .song-number {
+    width: 24px; height: 24px;
+    background: var(--green-light);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .song-attachments {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+  }
+  .attach-chip {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: var(--green-light);
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* Chip row */
+  .chip-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .chip {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: 1.5px solid var(--gray-light);
+    color: var(--gray-dark);
+    cursor: pointer;
+  }
+  .chip.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--gray-light);
+    margin: 10px 0;
+  }
+
+  /* Screen sections */
+  .screen-section { display: none; }
+  .screen-section.visible { display: block; }
+
+  /* Module navigation */
+  .module-nav {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .module-btn {
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: 1.5px solid var(--gray-light);
+    background: white;
+    color: var(--gray-dark);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .module-btn.active, .module-btn:hover {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  /* Scale team member */
+  .team-slot {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .team-slot .function-tag {
+    margin-left: auto;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: var(--green-light);
+    color: var(--green);
+  }
+
+  /* Post feed */
+  .post-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+  }
+  .post-img {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, var(--green-light), var(--green));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+  .post-body { padding: 10px 12px; }
+  .post-title { font-size: 13px; font-weight: 700; }
+  .post-date { font-size: 10px; color: var(--gray); margin-top: 2px; }
+  .post-text { font-size: 11px; color: var(--gray-dark); margin-top: 6px; line-height: 1.5; }
+
+  /* Login screen */
+  .login-screen {
+    background: var(--green);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .login-logo {
+    width: 80px; height: 80px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .login-church-name {
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .login-tagline {
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .login-form {
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .login-form .input-field { margin-bottom: 10px; }
+
+  /* Profile */
+  .profile-header {
+    background: var(--green);
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .profile-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    border: 2px solid white;
+  }
+  .profile-name { color: white; font-size: 16px; font-weight: 700; font-family: Georgia, serif; }
+  .profile-role { color: rgba(255,255,255,0.75); font-size: 11px; }
+
+</style>
+</head>
+<body>
+
+<h1 class="page-title">⛪ App IP Ebenézer</h1>
+<p class="page-subtitle">Wireframes de Alta Fidelidade — Igreja Presbiteriana Ebenézer Taubaté</p>
+
+<div class="module-nav">
+  <button class="module-btn active" onclick="showModule('all')">Todas as Telas</button>
+  <button class="module-btn" onclick="showModule('auth')">Login</button>
+  <button class="module-btn" onclick="showModule('home')">Home</button>
+  <button class="module-btn" onclick="showModule('members')">Membros / EBD</button>
+  <button class="module-btn" onclick="showModule('agenda')">Agenda</button>
+  <button class="module-btn" onclick="showModule('worship')">Cultos / Escala</button>
+  <button class="module-btn" onclick="showModule('repertoire')">Repertório</button>
+</div>
+
+<div class="screens-grid" id="screensGrid">
+
+  <!-- ══════════════════════════════════
+       TELA 1: LOGIN
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="auth">
+    <span class="screen-label">01 · Login</span>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>● ● ●</span>
+      </div>
+      <div class="login-screen">
+        <div class="login-logo">✝</div>
+        <div class="login-church-name">Igreja Presbiteriana<br>Ebenézer</div>
+        <div class="login-tagline">Taubaté · SP</div>
+        <div class="login-form">
+          <div class="input-label">E-mail</div>
+          <div class="input-field">joao.silva@email.com</div>
+          <div class="input-label" style="margin-top:8px">Senha</div>
+          <div class="input-field">••••••••</div>
+          <div class="btn-primary">Entrar</div>
+          <div style="text-align:center;margin-top:12px;font-size:11px;color:var(--gray)">
+            Não tem acesso? Fale com o líder.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 2: HOME
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="home">
+    <span class="screen-label">02 · Home</span>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span><span>● ● ●</span>
+      </div>
+      <div class="app-header">
+        <div class="logo-mark">✝</div>
+        <div class="header-text">
+          <h2>IP Ebenézer</h2>
+          <p>Taubaté · SP</p>
+        </div>
+        <div class="header-action">🔔</div>
+      </div>
+      <div class="screen-body">
+        <div class="hero-banner">
+          <div class="hi">Olá, 👋</div>
+          <div class="name">João Silva</div>
+          <div style="font-size:10px;opacity:0.7;margin-top:2px">Líder de Louvor</div>
+          <div class="next-event">
+            <div class="label">📅 PRÓXIMO CULTO</div>
+            <div class="value">Culto de Domingo — Dom 22/06</div>
+            <div style="font-size:10px;opacity:0.8;margin-top:2px">10:00 · Você está escalado ✓</div>
+          </div>
+        </div>
+
+        <div class="section-title">Sua escala desta semana</div>
+        <div class="card">
+          <div class="card-row">
+            <div style="font-size:24px">🎵</div>
+            <div>
+              <div class="card-title">Culto de Domingo</div>
+              <div class="card-subtitle">Dom 22/06 · 10:00</div>
+              <div class="card-meta">Vocal · 4 músicas cadastradas</div>
+            </div>
+            <div style="margin-left:auto;font-size:18px">›</div>
+          </div>
+        </div>
+
+        <div class="section-title">Próximos Eventos</div>
+        <div class="card">
+          <div class="event-row">
+            <div class="event-date"><div class="day">22</div><div class="month">Jun</div></div>
+            <div>
+              <div class="card-title">Culto de Domingo Manhã</div>
+              <div class="card-subtitle">10:00 · Tema: "A Fé que Vence"</div>
+            </div>
+          </div>
+          <div class="event-row">
+            <div class="event-date"><div class="day">25</div><div class="month">Jun</div></div>
+            <div>
+              <div class="card-title">Reunião de Jovens</div>
+              <div class="card-subtitle">19:30 · Salão principal</div>
+            </div>
+          </div>
+          <div class="event-row">
+            <div class="event-date"><div class="day">29</div><div class="month">Jun</div></div>
+            <div>
+              <div class="card-title">Culto de Domingo Noite</div>
+              <div class="card-subtitle">18:00 · Culto especial</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Boletim Recente</div>
+        <div class="card">
+          <div class="card-row">
+            <div style="font-size:20px">📢</div>
+            <div>
+              <div class="card-title">Novos horários de culto</div>
+              <div class="card-subtitle">19 jan · Leia o aviso completo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 3: LISTA DE MEMBROS
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="members">
+    <span class="screen-label">03 · Membros</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="sub-header">
+        <span class="back-btn">←</span>
+        <h2>Membros</h2>
+        <div class="action-btn">+ Novo</div>
+      </div>
+      <div class="screen-body">
+        <div class="input-field" style="background:white;margin-bottom:10px">🔍 Buscar membro...</div>
+
+        <div class="chip-row" style="margin-bottom:12px;margin-top:0">
+          <div class="chip active">Todos</div>
+          <div class="chip">Pastores</div>
+          <div class="chip">Líderes</div>
+          <div class="chip">Membros</div>
+          <div class="chip">Visitantes</div>
+        </div>
+
+        <div class="card" style="padding:8px 12px">
+          <div class="attendance-row">
+            <div class="avatar">JS</div>
+            <div>
+              <div class="card-title">João Silva</div>
+              <div class="card-subtitle">Líder · (12) 99999-0000</div>
+            </div>
+            <div class="badge badge-green" style="margin-left:auto">Líder</div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar">MA</div>
+            <div>
+              <div class="card-title">Maria Alves</div>
+              <div class="card-subtitle">Membro · (12) 98888-1111</div>
+            </div>
+            <div class="badge badge-gray" style="margin-left:auto">Membro</div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar">RP</div>
+            <div>
+              <div class="card-title">Rev. Roberto Pereira</div>
+              <div class="card-subtitle">Pastor · (12) 97777-2222</div>
+            </div>
+            <div class="badge badge-green" style="margin-left:auto;background:#FEF3C7;color:#92400E">Pastor</div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar">CF</div>
+            <div>
+              <div class="card-title">Carla Ferreira</div>
+              <div class="card-subtitle">Membro · (12) 96666-3333</div>
+            </div>
+            <div class="badge badge-gray" style="margin-left:auto">Membro</div>
+          </div>
+          <div class="attendance-row" style="border-bottom:none">
+            <div class="avatar">TN</div>
+            <div>
+              <div class="card-title">Thiago Nascimento</div>
+              <div class="card-subtitle">Visitante · (12) 95555-4444</div>
+            </div>
+            <div class="badge badge-red" style="margin-left:auto">Visitante</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item active"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 4: EBD — CHAMADA
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="members">
+    <span class="screen-label">04 · EBD · Chamada</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="sub-header">
+        <span class="back-btn">←</span>
+        <h2>Turma Adultos</h2>
+        <div class="action-btn">Salvar</div>
+      </div>
+      <div class="screen-body">
+        <div class="card" style="padding:10px 12px;margin-bottom:12px">
+          <div style="font-size:11px;color:var(--gray)">Chamada do dia</div>
+          <div style="font-size:16px;font-weight:700;color:var(--green)">Domingo, 22 de Junho de 2026</div>
+          <div style="font-size:10px;color:var(--gray);margin-top:2px">Professora: Maria Alves · 6 alunos</div>
+        </div>
+
+        <div class="section-title">Presença dos Alunos</div>
+        <div class="card" style="padding:8px 12px">
+          <div class="attendance-row">
+            <div class="avatar-sm">JS</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">João Silva</div></div>
+            <div class="toggle on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar-sm">CF</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Carla Ferreira</div></div>
+            <div class="toggle on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar-sm">TN</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Thiago Nascimento</div></div>
+            <div class="toggle"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar-sm">AP</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Ana Paula Costa</div></div>
+            <div class="toggle on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="attendance-row">
+            <div class="avatar-sm">LM</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Lucas Moura</div></div>
+            <div class="toggle"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="attendance-row" style="border-bottom:none">
+            <div class="avatar-sm">BR</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Beatriz Rocha</div></div>
+            <div class="toggle on"><div class="toggle-thumb"></div></div>
+          </div>
+        </div>
+
+        <div class="card" style="background:var(--green-light);border:1px solid var(--green)">
+          <div style="font-size:11px;color:var(--green);font-weight:700">Resumo da Chamada</div>
+          <div style="display:flex;gap:16px;margin-top:6px">
+            <div><div style="font-size:18px;font-weight:900;color:var(--green)">4</div><div style="font-size:10px;color:var(--gray)">Presentes</div></div>
+            <div><div style="font-size:18px;font-weight:900;color:var(--red)">2</div><div style="font-size:10px;color:var(--gray)">Ausentes</div></div>
+            <div><div style="font-size:18px;font-weight:900;color:var(--green-dark)">67%</div><div style="font-size:10px;color:var(--gray)">Frequência</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item active"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 5: BOLETIM / FEED
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="agenda">
+    <span class="screen-label">05 · Boletim</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="app-header">
+        <div class="logo-mark">✝</div>
+        <div class="header-text">
+          <h2>Boletim</h2>
+          <p>Novidades da IP Ebenézer</p>
+        </div>
+        <div class="header-action" style="font-size:16px">✏️</div>
+      </div>
+      <div class="screen-body">
+        <div class="post-card">
+          <div class="post-img">📢</div>
+          <div class="post-body">
+            <div class="badge badge-green" style="margin-bottom:6px">AVISO</div>
+            <div class="post-title">Novos horários de programações em nossa igreja!</div>
+            <div class="post-date">19 de janeiro · Pastor Roberto</div>
+            <div class="post-text">A partir de fevereiro, o culto dominical da manhã passará para as 10h. Confira todos os novos horários...</div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-img" style="background:linear-gradient(135deg,#FEF3C7,#F59E0B)">🎉</div>
+          <div class="post-body">
+            <div class="badge" style="background:#FEF3C7;color:#92400E;margin-bottom:6px">EVENTO</div>
+            <div class="post-title">Congresso de Jovens — Inscrições abertas!</div>
+            <div class="post-date">15 de junho · Equipe de Jovens</div>
+            <div class="post-text">As inscrições para o Congresso de Jovens 2026 estão abertas. Vagas limitadas...</div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-body" style="padding-top:12px">
+            <div class="badge badge-gray" style="margin-bottom:6px">GERAL</div>
+            <div class="post-title">Reunião de Conselho — Ata de Maio</div>
+            <div class="post-date">10 de junho · Secretaria</div>
+            <div class="post-text">A ata da reunião de Conselho do mês de maio está disponível para os membros...</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item active"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+      <div class="fab">+</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 6: CALENDÁRIO
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="agenda">
+    <span class="screen-label">06 · Calendário</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="sub-header">
+        <span class="back-btn">←</span>
+        <h2>Calendário — Junho</h2>
+      </div>
+      <div class="screen-body">
+        <!-- Mini Calendar -->
+        <div class="card" style="padding:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:14px;font-weight:700;color:var(--green-dark)">Junho 2026</span>
+            <div style="display:flex;gap:8px">
+              <span style="color:var(--green);cursor:pointer">‹</span>
+              <span style="color:var(--green);cursor:pointer">›</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;gap:2px">
+            <div style="font-size:9px;color:var(--gray);font-weight:700">D</div>
+            <div style="font-size:9px;color:var(--gray);font-weight:700">S</div>
+            <div style="font-size:9px;color:var(--gray);font-weight:700">T</div>
+            <div style="font-size:9px;color:var(--gray);font-weight:700">Q</div>
+            <div style="font-size:9px;color:var(--gray);font-weight:700">Q</div>
+            <div style="font-size:9px;color:var(--gray);font-weight:700">S</div>
+            <div style="font-size:9px;color:var(--gray);font-weight:700">S</div>
+            <!-- Week 1 -->
+            <div style="font-size:11px;color:var(--gray)">1</div>
+            <div style="font-size:11px">2</div>
+            <div style="font-size:11px">3</div>
+            <div style="font-size:11px">4</div>
+            <div style="font-size:11px">5</div>
+            <div style="font-size:11px">6</div>
+            <div style="font-size:11px">7</div>
+            <!-- Week 2 -->
+            <div style="font-size:11px;background:var(--green);color:white;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin:0 auto">8</div>
+            <div style="font-size:11px">9</div>
+            <div style="font-size:11px">10</div>
+            <div style="font-size:11px">11</div>
+            <div style="font-size:11px">12</div>
+            <div style="font-size:11px">13</div>
+            <div style="font-size:11px">14</div>
+            <!-- Week 3 -->
+            <div style="font-size:11px;border:1.5px solid var(--green);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin:0 auto;color:var(--green);font-weight:700">15</div>
+            <div style="font-size:11px">16</div>
+            <div style="font-size:11px">17</div>
+            <div style="font-size:11px">18</div>
+            <div style="font-size:11px">19</div>
+            <div style="font-size:11px">20</div>
+            <div style="font-size:11px">21</div>
+            <!-- Week 4 -->
+            <div style="font-size:11px;position:relative">22<div style="width:4px;height:4px;background:var(--green);border-radius:50%;margin:0 auto"></div></div>
+            <div style="font-size:11px">23</div>
+            <div style="font-size:11px">24</div>
+            <div style="font-size:11px;position:relative">25<div style="width:4px;height:4px;background:#F59E0B;border-radius:50%;margin:0 auto"></div></div>
+            <div style="font-size:11px">26</div>
+            <div style="font-size:11px">27</div>
+            <div style="font-size:11px">28</div>
+          </div>
+        </div>
+
+        <div class="section-title">Eventos de Junho</div>
+        <div class="card" style="padding:10px 12px">
+          <div class="event-row">
+            <div class="event-date"><div class="day">22</div><div class="month">Jun</div></div>
+            <div>
+              <div class="card-title">Culto de Domingo Manhã</div>
+              <div class="card-subtitle">10:00 · "A Fé que Vence"</div>
+              <div class="badge badge-green" style="margin-top:4px">Culto</div>
+            </div>
+          </div>
+          <div class="event-row">
+            <div class="event-date"><div class="day">25</div><div class="month">Jun</div></div>
+            <div>
+              <div class="card-title">Aniversário · Carlos Braga 🎂</div>
+              <div class="card-subtitle">Membro da igreja</div>
+              <div class="badge badge-gray" style="margin-top:4px">Aniversário</div>
+            </div>
+          </div>
+          <div class="event-row" style="border-bottom:none">
+            <div class="event-date"><div class="day">29</div><div class="month">Jun</div></div>
+            <div>
+              <div class="card-title">Culto de Domingo Noite</div>
+              <div class="card-subtitle">18:00 · Culto especial</div>
+              <div class="badge badge-green" style="margin-top:4px">Culto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item active"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 7: LISTA DE CULTOS
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="worship">
+    <span class="screen-label">07 · Cultos</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="app-header">
+        <div class="logo-mark">✝</div>
+        <div class="header-text">
+          <h2>Cultos</h2>
+          <p>Próximos programas</p>
+        </div>
+        <div class="header-action" style="font-size:16px">⚙️</div>
+      </div>
+      <div class="screen-body">
+        <div class="section-title">Próximos</div>
+        <div class="card">
+          <div class="card-row">
+            <div style="font-size:28px">⛪</div>
+            <div style="flex:1">
+              <div class="card-title">Culto de Domingo Manhã</div>
+              <div class="card-subtitle">Dom 22/06 · 10:00</div>
+              <div class="card-meta">Tema: "A Fé que Vence"</div>
+              <div class="chip-row" style="margin-top:6px">
+                <div class="badge badge-green">Escala criada ✓</div>
+                <div class="badge badge-green">4 músicas</div>
+              </div>
+            </div>
+            <div style="font-size:18px;color:var(--gray)">›</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <div style="font-size:28px">🙏</div>
+            <div style="flex:1">
+              <div class="card-title">Culto de Jovens</div>
+              <div class="card-subtitle">Sex 27/06 · 19:30</div>
+              <div class="card-meta">Tema: "Identidade em Cristo"</div>
+              <div class="chip-row" style="margin-top:6px">
+                <div class="badge badge-red">Sem escala</div>
+              </div>
+            </div>
+            <div style="font-size:18px;color:var(--gray)">›</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <div style="font-size:28px">⛪</div>
+            <div style="flex:1">
+              <div class="card-title">Culto de Domingo Noite</div>
+              <div class="card-subtitle">Dom 29/06 · 18:00</div>
+              <div class="card-meta">Culto especial de aniversário</div>
+              <div class="chip-row" style="margin-top:6px">
+                <div class="badge badge-gray">Escala pendente</div>
+              </div>
+            </div>
+            <div style="font-size:18px;color:var(--gray)">›</div>
+          </div>
+        </div>
+
+        <div class="btn-outline" style="margin-top:4px">+ Criar Novo Culto</div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item active"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 8: GERENCIAR ESCALA
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="worship">
+    <span class="screen-label">08 · Gerenciar Escala</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="sub-header">
+        <span class="back-btn">←</span>
+        <h2>Escala · Dom 22/06</h2>
+        <div class="action-btn">Notificar</div>
+      </div>
+      <div class="screen-body">
+        <div class="card" style="background:var(--green);padding:10px 14px;margin-bottom:12px">
+          <div style="color:white;font-size:12px;opacity:0.8">Culto de Domingo Manhã</div>
+          <div style="color:white;font-size:15px;font-weight:700">22 de Junho · 10:00</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:11px;margin-top:2px">Tema: "A Fé que Vence"</div>
+        </div>
+
+        <div class="section-title">Equipe escalada</div>
+        <div class="team-slot">
+          <div class="avatar-sm">JS</div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:700">João Silva</div><div style="font-size:10px;color:var(--gray)">Violão</div></div>
+          <div class="function-tag">VOCAL</div>
+          <div style="font-size:14px;color:var(--green)">✓</div>
+        </div>
+        <div class="team-slot">
+          <div class="avatar-sm">CF</div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:700">Carla Ferreira</div><div style="font-size:10px;color:var(--gray)">Teclado</div></div>
+          <div class="function-tag">INSTRUMENTISTA</div>
+          <div style="font-size:14px;color:var(--green)">✓</div>
+        </div>
+        <div class="team-slot">
+          <div class="avatar-sm">MA</div>
+          <div style="flex:1"><div style="font-size:12px;font-weight:700">Maria Alves</div><div style="font-size:10px;color:var(--gray)">Soprano</div></div>
+          <div class="function-tag">VOCAL</div>
+          <div style="font-size:14px;color:var(--gray)">?</div>
+        </div>
+        <div class="team-slot" style="border:1.5px dashed var(--gray-light);background:var(--bg);justify-content:center">
+          <div style="font-size:12px;color:var(--green);font-weight:600">+ Adicionar membro</div>
+        </div>
+
+        <div class="section-title" style="margin-top:14px">Repertório</div>
+        <div class="song-card">
+          <div class="song-number">1</div>
+          <div style="flex:1">
+            <div class="card-title" style="font-size:12px">Grande é o Senhor</div>
+            <div class="card-subtitle">Ministério Vineyard · Tom: G</div>
+            <div class="song-attachments">
+              <div class="attach-chip">📄 Letra</div>
+              <div class="attach-chip">🎸 Cifra</div>
+              <div class="attach-chip">🎵 Áudio</div>
+            </div>
+          </div>
+          <div style="font-size:16px;color:var(--gray)">⋮</div>
+        </div>
+        <div class="song-card">
+          <div class="song-number">2</div>
+          <div style="flex:1">
+            <div class="card-title" style="font-size:12px">Quão Grande é o meu Deus</div>
+            <div class="card-subtitle">Chris Tomlin · Tom: C</div>
+            <div class="song-attachments">
+              <div class="attach-chip">📄 Letra</div>
+              <div class="attach-chip">🎸 Cifra</div>
+            </div>
+          </div>
+          <div style="font-size:16px;color:var(--gray)">⋮</div>
+        </div>
+        <div class="song-card">
+          <div class="song-number">3</div>
+          <div style="flex:1">
+            <div class="card-title" style="font-size:12px">Oceanos</div>
+            <div class="card-subtitle">Hillsong · Tom: D</div>
+            <div class="song-attachments">
+              <div class="attach-chip">🎵 Áudio</div>
+            </div>
+          </div>
+          <div style="font-size:16px;color:var(--gray)">⋮</div>
+        </div>
+        <div class="song-card" style="background:var(--bg);border:1.5px dashed var(--gray-light);justify-content:center">
+          <div style="font-size:12px;color:var(--green);font-weight:600">+ Adicionar música ao repertório</div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item active"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 9: DETALHE DA MÚSICA
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="repertoire">
+    <span class="screen-label">09 · Detalhe da Música</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="sub-header">
+        <span class="back-btn">←</span>
+        <h2>Detalhe da Música</h2>
+        <div class="action-btn">✏️ Editar</div>
+      </div>
+      <div class="screen-body">
+        <div class="card" style="padding:14px;margin-bottom:10px">
+          <div style="font-size:18px;font-weight:700;font-family:Georgia,serif;color:var(--green-dark)">Grande é o Senhor</div>
+          <div style="font-size:13px;color:var(--gray);margin-top:2px">Ministério Vineyard</div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <div class="badge badge-green">Tom: G</div>
+            <div class="badge badge-gray">BPM: 72</div>
+          </div>
+        </div>
+
+        <div class="section-title">Arquivos</div>
+        <div class="card" style="padding:10px 12px">
+          <div class="card-row" style="padding:8px 0;border-bottom:1px solid var(--gray-light)">
+            <div style="font-size:20px">📄</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Letra da Música</div><div class="card-subtitle">PDF · 245 KB</div></div>
+            <div style="font-size:20px;color:var(--green)">↓</div>
+          </div>
+          <div class="card-row" style="padding:8px 0;border-bottom:1px solid var(--gray-light)">
+            <div style="font-size:20px">🎸</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Cifra / Partitura</div><div class="card-subtitle">PDF · 180 KB</div></div>
+            <div style="font-size:20px;color:var(--green)">↓</div>
+          </div>
+          <div class="card-row" style="padding:8px 0">
+            <div style="font-size:20px">🎵</div>
+            <div style="flex:1"><div class="card-title" style="font-size:12px">Guia Musical</div><div class="card-subtitle">MP3 · Link externo</div></div>
+            <div style="font-size:20px;color:var(--green)">▶</div>
+          </div>
+        </div>
+
+        <div class="section-title">Divisão de Vozes</div>
+        <div class="card" style="padding:10px 12px">
+          <div class="card-row" style="padding:6px 0;border-bottom:1px solid var(--gray-light)">
+            <div class="badge" style="background:#FEE2E2;color:#991B1B;font-size:10px;padding:3px 8px">SOPRANO</div>
+            <div style="flex:1;margin-left:8px"><div class="card-subtitle">soprano_grande_senhor.mp3</div></div>
+            <div style="font-size:16px;color:var(--green)">▶</div>
+          </div>
+          <div class="card-row" style="padding:6px 0;border-bottom:1px solid var(--gray-light)">
+            <div class="badge" style="background:#EDE9FE;color:#5B21B6;font-size:10px;padding:3px 8px">CONTRALTO</div>
+            <div style="flex:1;margin-left:8px"><div class="card-subtitle">contralto_grande_senhor.mp3</div></div>
+            <div style="font-size:16px;color:var(--green)">▶</div>
+          </div>
+          <div class="card-row" style="padding:6px 0">
+            <div class="badge" style="background:#DBEAFE;color:#1E40AF;font-size:10px;padding:3px 8px">TENOR</div>
+            <div style="flex:1;margin-left:8px"><div class="card-subtitle">Nota: "Entrar na 2ª estrofe"</div></div>
+            <div style="font-size:16px;color:var(--gray)">📝</div>
+          </div>
+        </div>
+
+        <div class="section-title">Histórico de uso</div>
+        <div class="card" style="padding:10px 12px">
+          <div style="font-size:11px;color:var(--gray-dark)">Usada em <span style="font-weight:700;color:var(--green)">3 escalas</span> nos últimos 90 dias</div>
+          <div style="font-size:10px;color:var(--gray);margin-top:4px">Última: Culto Dom 08/06</div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item active"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 10: PERFIL
+  ══════════════════════════════════ -->
+  <div class="screen-wrapper" data-module="home">
+    <span class="screen-label">10 · Perfil</span>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>● ● ●</span></div>
+      <div class="profile-header">
+        <div class="profile-avatar">👤</div>
+        <div>
+          <div class="profile-name">João Silva</div>
+          <div class="profile-role">Líder de Louvor · IP Ebenézer</div>
+          <div class="badge badge-green" style="margin-top:4px;background:rgba(255,255,255,0.2);color:white">Membro ativo</div>
+        </div>
+      </div>
+      <div class="screen-body">
+        <div class="section-title">Informações</div>
+        <div class="card" style="padding:10px 12px">
+          <div class="card-row" style="padding:7px 0;border-bottom:1px solid var(--gray-light)">
+            <div style="font-size:16px">📞</div>
+            <div style="flex:1;margin-left:8px"><div class="card-subtitle">Telefone</div><div class="card-title" style="font-size:12px">(12) 99999-0000</div></div>
+          </div>
+          <div class="card-row" style="padding:7px 0;border-bottom:1px solid var(--gray-light)">
+            <div style="font-size:16px">📧</div>
+            <div style="flex:1;margin-left:8px"><div class="card-subtitle">E-mail</div><div class="card-title" style="font-size:12px">joao.silva@email.com</div></div>
+          </div>
+          <div class="card-row" style="padding:7px 0">
+            <div style="font-size:16px">🎂</div>
+            <div style="flex:1;margin-left:8px"><div class="card-subtitle">Data de nascimento</div><div class="card-title" style="font-size:12px">15 de março de 1990</div></div>
+          </div>
+        </div>
+
+        <div class="section-title">Minhas escalas</div>
+        <div class="card" style="padding:10px 12px">
+          <div class="card-row" style="padding:7px 0;border-bottom:1px solid var(--gray-light)">
+            <div style="font-size:16px">🎵</div>
+            <div style="flex:1;margin-left:8px"><div class="card-title" style="font-size:12px">Culto Dom 22/06</div><div class="card-subtitle">Vocal · 10:00</div></div>
+            <div class="badge badge-green">Confirmado</div>
+          </div>
+          <div class="card-row" style="padding:7px 0">
+            <div style="font-size:16px">🎵</div>
+            <div style="flex:1;margin-left:8px"><div class="card-title" style="font-size:12px">Culto Dom 29/06</div><div class="card-subtitle">Vocal · 18:00</div></div>
+            <div class="badge badge-gray">Pendente</div>
+          </div>
+        </div>
+
+        <div class="btn-outline" style="color:var(--red);border-color:var(--red);margin-top:8px">Sair da conta</div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="icon">🏠</div><div class="label">Home</div></div>
+        <div class="nav-item"><div class="icon">👥</div><div class="label">Membros</div></div>
+        <div class="nav-item"><div class="icon">📅</div><div class="label">Agenda</div></div>
+        <div class="nav-item"><div class="icon">🎵</div><div class="label">Cultos</div></div>
+        <div class="nav-item active"><div class="icon">👤</div><div class="label">Perfil</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /screens-grid -->
+
+<script>
+  function showModule(module) {
+    document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const screens = document.querySelectorAll('.screen-wrapper');
+    screens.forEach(s => {
+      if (module === 'all' || s.dataset.module === module) {
+        s.style.display = 'flex';
+      } else {
+        s.style.display = 'none';
+      }
+    });
+  }
+
+  // Toggles interativos
+  document.querySelectorAll('.toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => toggle.classList.toggle('on'));
+  });
+</script>
+</body>
+</html>

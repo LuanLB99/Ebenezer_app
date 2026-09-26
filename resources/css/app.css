@@ -23,16 +23,22 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
+    /* Identidade visual IP Ebenézer (docs/spec-tecnica.md) */
+    --color-brand: #1A6648;
+    --color-brand-dark: #0F3D2A;
+    --color-brand-light: #E8F4EE;
+
+    /* Flux usa "accent" em botões primários, links e foco. Branco sobre #1A6648 ≈ 6,9:1 (WCAG AA). Modo escuro: #0F3D2A sobre #4CAF82 ≈ 4,5:1 (AA). */
+    --color-accent: var(--color-brand);
+    --color-accent-content: var(--color-brand);
     --color-accent-foreground: var(--color-white);
 }
 
 @layer theme {
     .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
+        --color-accent: #4CAF82;
+        --color-accent-content: #6FC79D;
+        --color-accent-foreground: var(--color-brand-dark);
     }
 }
 
