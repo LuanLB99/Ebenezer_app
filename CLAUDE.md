@@ -26,6 +26,7 @@ Laravel 13 · PHP **8.4 como plataforma-alvo** (`config.platform.php` no compose
 
 ## Convenções
 
+- **Antes de começar qualquer tarefa, leia `docs/roadmap.md`** (o que fazer e em que ordem) e as regras de negócio citadas em `docs/diagnostico-fase0.md`.
 - **Código em inglês, textos de UI em pt-BR.**
 - `class` é palavra reservada: a entidade "Classe" é o model **`Group`** (tabela `groups`).
 - Autorização **sempre** via Policies/Gates — nunca `if ($user->is_admin)` espalhado em controller/Blade.
