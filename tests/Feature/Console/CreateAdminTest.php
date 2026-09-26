@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 
 uses(RefreshDatabase::class);
 
-
 test('(D8) cria admin quando todas as opcoes sao informadas', function () {
     $this->artisan('app:create-admin', [
         '--name' => 'Admin Teste',
